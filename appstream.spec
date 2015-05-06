@@ -13,7 +13,7 @@
 Summary:	Utilities to generate, maintain and access the AppStream Xapian database
 Name:		appstream
 Version:	0.8.0
-Release:	1
+Release:	2
 # lib LGPLv2.1+, tools GPLv2+
 License:	GPLv2+ and LGPLv2.1+
 Group:		System/Configuration/Packaging
@@ -152,6 +152,9 @@ Development files for %{name}.
 
 %install
 %makeinstall_std -C build
+
+# Dirty hack for cmake bug
+sed s,"INTERFACE_INCLUDE_DIRECTORIES.*","INTERFACE_INCLUDE_DIRECTORIES \"%{_includedir}\"",g -i %{buildroot}%{_libdir}/cmake/AppstreamQt/AppstreamQtTargets.cmake
 
 mkdir -p %{buildroot}%{_datadir}/app-info/{icons,xmls}
 mkdir -p %{buildroot}%{_var}/cache/app-info/{icons,xapian,xmls}
