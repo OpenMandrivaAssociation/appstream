@@ -1,0 +1,11 @@
+diff -urN AppStream-0.8.0/src/appstream.pc.in AppStream-0.8.0-patched/src/appstream.pc.in
+--- AppStream-0.8.0/src/appstream.pc.in	2015-01-27 20:30:20.000000000 +1000
++++ AppStream-0.8.0-patched/src/appstream.pc.in	2015-05-06 21:19:37.899649861 +1000
+@@ -1,6 +1,6 @@
+ prefix=@CMAKE_INSTALL_PREFIX@
+ exec_prefix=${prefix}
+-libdir=${prefix}/@CMAKE_INSTALL_LIBDIR@
++libdir=@CMAKE_INSTALL_LIBDIR@
+ includedir=${prefix}/include/AppStream
+ 
+ Name: appstream

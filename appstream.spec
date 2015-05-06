@@ -19,6 +19,7 @@ License:	GPLv2+ and LGPLv2.1+
 Group:		System/Configuration/Packaging
 Url:		http://www.freedesktop.org/wiki/Distributions/AppStream/Software
 Source0:	http://www.freedesktop.org/software/appstream/releases/%{oname}-%{version}.tar.xz
+Patch0:		AppStream-0.8.0-fix-pkgconfig.patch
 BuildRequires:	cmake
 BuildRequires:	intltool
 BuildRequires:	xmlto
@@ -123,6 +124,7 @@ Shared library for %{name}.
 Summary:	Development files for %{name}
 Group:		Development/KDE and Qt
 Requires:	%{libnameqt} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
 Provides:	%{name}-qt5-devel = %{EVRD}
 
 %description -n %{devnameqt}
@@ -137,6 +139,7 @@ Development files for %{name}.
 
 %prep
 %setup -qn %{oname}-%{version}
+%patch0 -p1
 
 %build
 %cmake \
