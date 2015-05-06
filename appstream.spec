@@ -21,6 +21,7 @@ Url:		http://www.freedesktop.org/wiki/Distributions/AppStream/Software
 Source0:	http://www.freedesktop.org/software/appstream/releases/%{oname}-%{version}.tar.xz
 BuildRequires:	cmake
 BuildRequires:	intltool
+BuildRequires:	xmlto
 BuildRequires:	xapian-core-devel
 BuildRequires:	pkgconfig(gio-2.0)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
