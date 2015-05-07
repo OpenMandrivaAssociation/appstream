@@ -20,7 +20,8 @@ Group:		System/Configuration/Packaging
 Url:		http://www.freedesktop.org/wiki/Distributions/AppStream/Software
 Source0:	http://www.freedesktop.org/software/appstream/releases/%{oname}-%{version}.tar.xz
 BuildRequires:	cmake
-BuildRequires:	xapian-core-devel
+BuildRequires:	intltool
+BuildRequires:	pkgconfig(xapian-core)
 BuildRequires:	pkgconfig(gio-2.0)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(libxml-2.0)
