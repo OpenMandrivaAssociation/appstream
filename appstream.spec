@@ -29,6 +29,7 @@ BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	pkgconfig(packagekit-glib2)
 BuildRequires:	pkgconfig(Qt5Core)
+BuildRequires:	pkgconfig(Qt5Test)
 BuildRequires:	pkgconfig(yaml-0.1)
 # Should be added later, requires generation script
 # Requires:	appstream-data
