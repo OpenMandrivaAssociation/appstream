@@ -41,10 +41,8 @@ AppStream database over a nice GObject-based interface.
 %files -f appstream.lang
 %doc AUTHORS LICENSE.GPLv2 LICENSE.LGPLv2.1
 %config(noreplace) %{_sysconfdir}/appstream.conf
-%{_bindir}/appstream-index
-%{_bindir}/appstream-validate
-%{_mandir}/man1/appstream-index.1*
-%{_mandir}/man1/appstream-validate.1*
+%{_bindir}/appstreamcli
+%{_mandir}/man1/appstreamcli.1.*
 %dir %{_datadir}/app-info/
 %dir %{_datadir}/app-info/icons
 %dir %{_datadir}/app-info/xmls
@@ -117,6 +115,7 @@ Shared library for %{name}.
 
 %files -n %{libnameqt}
 %{_libdir}/libAppstreamQt.so.%{qt_major}*
+%{_libdir}/libAppstreamQt.so.%{version}*
 
 #----------------------------------------------------------------------------
 
