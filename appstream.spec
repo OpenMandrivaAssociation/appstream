@@ -31,6 +31,7 @@ BuildRequires:	pkgconfig(packagekit-glib2)
 BuildRequires:	pkgconfig(Qt5Core)
 BuildRequires:	pkgconfig(Qt5Test)
 BuildRequires:	pkgconfig(yaml-0.1)
+BuildRequires:	pkgconfig(protobuf)
 # Should be added later, requires generation script
 # Requires:	appstream-data
 
