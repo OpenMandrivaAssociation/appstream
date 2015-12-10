@@ -32,6 +32,7 @@ BuildRequires:	pkgconfig(Qt5Core)
 BuildRequires:	pkgconfig(Qt5Test)
 BuildRequires:	pkgconfig(yaml-0.1)
 BuildRequires:	pkgconfig(protobuf)
+BuildRequires:	pkgconfig(protobuf-lite)
 # Should be added later, requires generation script
 # Requires:	appstream-data
 
