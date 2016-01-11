@@ -103,7 +103,7 @@ Development files for %{name}.
 %{_libdir}/libappstream.so
 %{_libdir}/pkgconfig/appstream.pc
 %dir %{_datadir}/gir-1.0
-%{_datadir}/gir-1.0/AppStream-0.8.gir
+%{_datadir}/gir-1.0/AppStream-%{girmajor}.gir
 %dir %{_datadir}/gtk-doc/
 %dir %{_datadir}/gtk-doc/html/
 %{_datadir}/gtk-doc/html/appstream
