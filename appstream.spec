@@ -1,7 +1,7 @@
 %define oname AppStream
 
-%define major 2
-%define girmajor 0.8
+%define major 3
+%define girmajor 1.0
 %define libname %mklibname %{name} %{major}
 %define girname %mklibname %{name}-gir %{girmajor}
 %define devname %mklibname %{name} -d
@@ -63,6 +63,7 @@ AppStream database over a nice GObject-based interface.
 %package -n %{libname}
 Summary:	Shared library for %{name}
 Group:		System/Libraries
+Obsoletes:	%{mklibname appstream 2} < 0.9.0
 
 %description -n %{libname}
 Shared library for %{name}.
@@ -77,6 +78,7 @@ Shared library for %{name}.
 Summary:	GObject Introspection files for %{name}
 Group:		System/Libraries
 Requires:	%{libname} = %{EVRD}
+Obsoletes:	%{mklibname appstream-git 0.8} < 0.9.0
 
 %description -n %{girname}
 GObject Introspection files for %{name}.
