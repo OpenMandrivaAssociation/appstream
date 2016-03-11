@@ -12,7 +12,7 @@
 
 Summary:	Utilities to generate, maintain and access the AppStream Xapian database
 Name:		appstream
-Version:	0.9.0
+Version:	0.9.2
 Release:	1
 # lib LGPLv2.1+, tools GPLv2+
 License:	GPLv2+ and LGPLv2.1+
@@ -54,6 +54,7 @@ AppStream database over a nice GObject-based interface.
 %dir %{_var}/cache/app-info/icons
 %dir %{_var}/cache/app-info/xapian
 %dir %{_var}/cache/app-info/xmls
+%{_datadir}/gettext/its/metainfo.*
 
 %posttrans
 %{_bindir}/appstream-index refresh --force >& /dev/null ||:
