@@ -22,6 +22,7 @@ Source0:	http://www.freedesktop.org/software/appstream/releases/%{oname}-%{versi
 BuildRequires:	cmake
 BuildRequires:	qmake5
 BuildRequires:	intltool
+BuildRequires:	itstool
 BuildRequires:	xmlto
 BuildRequires:	pkgconfig(gio-2.0)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
