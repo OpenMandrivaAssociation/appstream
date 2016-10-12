@@ -23,7 +23,6 @@ BuildRequires:	cmake
 BuildRequires:	qmake5
 BuildRequires:	intltool
 BuildRequires:	xmlto
-BuildRequires:	pkgconfig(xapian-core)
 BuildRequires:	pkgconfig(gio-2.0)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(libxml-2.0)
@@ -31,8 +30,7 @@ BuildRequires:	pkgconfig(packagekit-glib2)
 BuildRequires:	pkgconfig(Qt5Core)
 BuildRequires:	pkgconfig(Qt5Test)
 BuildRequires:	pkgconfig(yaml-0.1)
-BuildRequires:	pkgconfig(protobuf)
-BuildRequires:	pkgconfig(protobuf-lite)
+BuildRequires:	libstemmer-devel
 # Should be added later, requires generation script
 # Requires:	appstream-data
 
@@ -41,7 +39,7 @@ AppStream-Core makes it easy to access application information from the
 AppStream database over a nice GObject-based interface.
 
 %files -f appstream.lang
-%doc AUTHORS LICENSE.GPLv2 LICENSE.LGPLv2.1
+%doc AUTHORS
 %config(noreplace) %{_sysconfdir}/appstream.conf
 %{_bindir}/appstreamcli
 %{_mandir}/man1/appstreamcli.1.*
@@ -145,10 +143,10 @@ Development files for %{name}.
 
 %build
 %cmake \
-	-DQT:BOOL=ON \
-	-DAPPSTREAM_QT_VERSION:STRING="5" \
-	-DTESTS:BOOL=ON \
-	-DVAPI:BOOL=OFF
+    -DQT:BOOL=ON \
+    -DAPPSTREAM_QT_VERSION:STRING="5" \
+    -DTESTS:BOOL=ON \
+    -DVAPI:BOOL=OFF
 
 %make
 
