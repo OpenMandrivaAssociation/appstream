@@ -1,0 +1,52 @@
+From aa4043875497431cf6b13b275e89e271eec706b4 Mon Sep 17 00:00:00 2001
+From: Neal Gompa <ngompa13@gmail.com>
+Date: Fri, 30 Sep 2016 09:28:14 -0400
+Subject: [PATCH] Add path for libstemmer headers to be found
+
+---
+ src/CMakeLists.txt | 17 +++++++++++++++--
+ 1 file changed, 15 insertions(+), 2 deletions(-)
+
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 338f44a..3b73f8e 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -12,6 +12,7 @@ if (STEMMING)
+ 	if (NOT SNOWBALL_LIB)
+ 		message (FATAL_ERROR "Stemming support is enabled, but libstemmer was not found. Please install the Snowball development files.")
+ 	endif ()
++	set(LIBSTEMMER_INCLUDE_DIR "/usr/include/libstemmer")
+ endif ()
+ 
+ include(GObjectIntrospectionMacros)
+@@ -95,13 +96,25 @@ set(APPSTREAM_LIB_PRIVATE_HEADERS
+ 		as-stemmer.h
+ )
+ 
+-include_directories(${CMAKE_BINARY_DIR}
++
++if (STEMMING)
++  include_directories(${CMAKE_BINARY_DIR}
+ 		    ${CMAKE_BINARY_DIR}/src
+ 		    ${GLIB2_INCLUDE_DIRS}
+ 		    ${GIO2_INCLUDE_DIRS}
+ 		    ${LIBXML2_INCLUDE_DIR}
+ 		    ${YAML_INCLUDE_DIR}
+-)
++		    ${LIBSTEMMER_INCLUDE_DIR}
++		    )
++else ()
++  include_directories(${CMAKE_BINARY_DIR}
++		    ${CMAKE_BINARY_DIR}/src
++		    ${GLIB2_INCLUDE_DIRS}
++		    ${GIO2_INCLUDE_DIRS}
++		    ${LIBXML2_INCLUDE_DIR}
++		    ${YAML_INCLUDE_DIR}
++		    )
++endif ()
+ 
+ add_definitions("-DAS_COMPILATION")
+ 
+-- 
+2.9.2
+

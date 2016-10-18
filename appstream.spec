@@ -19,6 +19,7 @@ License:	GPLv2+ and LGPLv2.1+
 Group:		System/Configuration/Packaging
 Url:		http://www.freedesktop.org/wiki/Distributions/AppStream/Software
 Source0:	http://www.freedesktop.org/software/appstream/releases/%{oname}-%{version}.tar.xz
+Patch0:		AppStream-0.10.1-mga-add-path-for-libstemmer-headers.patch
 BuildRequires:	cmake
 BuildRequires:	qmake5
 BuildRequires:	intltool
@@ -141,6 +142,7 @@ Development files for %{name}.
 
 %prep
 %setup -qn %{oname}-%{version}
+%apply_patches
 
 %build
 %cmake \
@@ -159,4 +161,3 @@ mkdir -p %{buildroot}%{_var}/cache/app-info/{icons,xapian,xmls}
 touch %{buildroot}%{_var}/cache/app-info/cache.watch
 
 %find_lang appstream
-
