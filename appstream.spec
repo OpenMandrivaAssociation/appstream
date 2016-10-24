@@ -1,6 +1,6 @@
 %define oname AppStream
 
-%define major 3
+%define major 4
 %define girmajor 1.0
 %define libname %mklibname %{name} %{major}
 %define girname %mklibname %{name}-gir %{girmajor}
@@ -12,18 +12,19 @@
 
 Summary:	Utilities to generate, maintain and access the AppStream Xapian database
 Name:		appstream
-Version:	0.9.3
+Version:	0.10.2
 Release:	1
 # lib LGPLv2.1+, tools GPLv2+
 License:	GPLv2+ and LGPLv2.1+
 Group:		System/Configuration/Packaging
 Url:		http://www.freedesktop.org/wiki/Distributions/AppStream/Software
 Source0:	http://www.freedesktop.org/software/appstream/releases/%{oname}-%{version}.tar.xz
+Patch0:		AppStream-0.10.1-mga-add-path-for-libstemmer-headers.patch
 BuildRequires:	cmake
 BuildRequires:	qmake5
 BuildRequires:	intltool
+BuildRequires:	itstool
 BuildRequires:	xmlto
-BuildRequires:	pkgconfig(xapian-core)
 BuildRequires:	pkgconfig(gio-2.0)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(libxml-2.0)
@@ -31,8 +32,7 @@ BuildRequires:	pkgconfig(packagekit-glib2)
 BuildRequires:	pkgconfig(Qt5Core)
 BuildRequires:	pkgconfig(Qt5Test)
 BuildRequires:	pkgconfig(yaml-0.1)
-BuildRequires:	pkgconfig(protobuf)
-BuildRequires:	pkgconfig(protobuf-lite)
+BuildRequires:	libstemmer-devel
 # Should be added later, requires generation script
 # Requires:	appstream-data
 
@@ -41,14 +41,14 @@ AppStream-Core makes it easy to access application information from the
 AppStream database over a nice GObject-based interface.
 
 %files -f appstream.lang
-%doc AUTHORS LICENSE.GPLv2 LICENSE.LGPLv2.1
+%doc AUTHORS
 %config(noreplace) %{_sysconfdir}/appstream.conf
 %{_bindir}/appstreamcli
 %{_mandir}/man1/appstreamcli.1.*
 %dir %{_datadir}/app-info/
 %dir %{_datadir}/app-info/icons
 %dir %{_datadir}/app-info/xmls
-%{_datadir}/app-info/categories.xml
+%{_datadir}/metainfo/org.freedesktop.appstream.cli.metainfo.xml
 %ghost %{_var}/cache/app-info/cache.watch
 %dir %{_var}/cache/app-info
 %dir %{_var}/cache/app-info/icons
@@ -142,13 +142,14 @@ Development files for %{name}.
 
 %prep
 %setup -qn %{oname}-%{version}
+%apply_patches
 
 %build
 %cmake \
-	-DQT:BOOL=ON \
-	-DAPPSTREAM_QT_VERSION:STRING="5" \
-	-DTESTS:BOOL=ON \
-	-DVAPI:BOOL=OFF
+    -DQT:BOOL=ON \
+    -DAPPSTREAM_QT_VERSION:STRING="5" \
+    -DTESTS:BOOL=ON \
+    -DVAPI:BOOL=OFF
 
 %make
 
@@ -160,4 +161,3 @@ mkdir -p %{buildroot}%{_var}/cache/app-info/{icons,xapian,xmls}
 touch %{buildroot}%{_var}/cache/app-info/cache.watch
 
 %find_lang appstream
-
