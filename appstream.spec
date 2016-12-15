@@ -13,13 +13,13 @@
 Summary:	Utilities to generate, maintain and access the AppStream Xapian database
 Name:		appstream
 Version:	0.10.2
-Release:	1
+Release:	2
 # lib LGPLv2.1+, tools GPLv2+
 License:	GPLv2+ and LGPLv2.1+
 Group:		System/Configuration/Packaging
 Url:		http://www.freedesktop.org/wiki/Distributions/AppStream/Software
 Source0:	http://www.freedesktop.org/software/appstream/releases/%{oname}-%{version}.tar.xz
-Patch0:		AppStream-0.10.1-mga-add-path-for-libstemmer-headers.patch
+Patch0:		0001-Add-path-for-libstemmer-headers-to-be-found.patch
 BuildRequires:	cmake
 BuildRequires:	qmake5
 BuildRequires:	intltool
@@ -33,6 +33,7 @@ BuildRequires:	pkgconfig(Qt5Core)
 BuildRequires:	pkgconfig(Qt5Test)
 BuildRequires:	pkgconfig(yaml-0.1)
 BuildRequires:	libstemmer-devel
+Requires:	%{libname} = %{EVRD}
 # Should be added later, requires generation script
 # Requires:	appstream-data
 
@@ -57,7 +58,7 @@ AppStream database over a nice GObject-based interface.
 %{_datadir}/gettext/its/metainfo.*
 
 %posttrans
-%{_bindir}/appstream-index refresh --force >& /dev/null ||:
+%{_bindir}/appstreamcli refresh --force >& /dev/null ||:
 
 #----------------------------------------------------------------------------
 
@@ -114,6 +115,7 @@ Development files for %{name}.
 %package -n %{libnameqt}
 Summary:	Shared library for %{name}
 Group:		System/Libraries
+Requires:	%{name} = %{EVRD}
 
 %description -n %{libnameqt}
 Shared library for %{name}.
