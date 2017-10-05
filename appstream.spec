@@ -12,14 +12,14 @@
 
 Summary:	Utilities to generate, maintain and access the AppStream Xapian database
 Name:		appstream
-Version:	0.11.3
+Version:	0.11.6
 Release:	1
 # lib LGPLv2.1+, tools GPLv2+
 License:	GPLv2+ and LGPLv2.1+
 Group:		System/Configuration/Packaging
 Url:		http://www.freedesktop.org/wiki/Distributions/AppStream/Software
 Source0:	http://www.freedesktop.org/software/appstream/releases/%{oname}-%{version}.tar.xz
-BuildRequires:	cmake
+BuildRequires:	meson
 BuildRequires:	qmake5
 BuildRequires:	intltool
 BuildRequires:	itstool
@@ -100,7 +100,7 @@ Provides:	%{name}-devel = %{EVRD}
 Development files for %{name}.
 
 %files -n %{devname}
-%{_includedir}/AppStream/
+%{_includedir}/appstream/
 %{_libdir}/libappstream.so
 %{_libdir}/pkgconfig/appstream.pc
 %dir %{_datadir}/gir-1.0
@@ -148,16 +148,11 @@ Development files for %{name}.
 %apply_patches
 
 %build
-%cmake \
-    -DQT:BOOL=ON \
-    -DAPPSTREAM_QT_VERSION:STRING="5" \
-    -DTESTS:BOOL=ON \
-    -DVAPI:BOOL=OFF
-
-%make
+%meson -Dqt=true
+ninja -C build
 
 %install
-%makeinstall_std -C build
+DESTDIR="%{buildroot}" ninja -C build install
 
 mkdir -p %{buildroot}%{_datadir}/app-info/{icons,xmls}
 mkdir -p %{buildroot}%{_var}/cache/app-info/{icons,xapian,xmls}
