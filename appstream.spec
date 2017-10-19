@@ -148,10 +148,14 @@ Development files for %{name}.
 %apply_patches
 
 %build
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 %meson -Dqt=true
 ninja -C build
 
 %install
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 DESTDIR="%{buildroot}" ninja -C build install
 
 mkdir -p %{buildroot}%{_datadir}/app-info/{icons,xmls}
