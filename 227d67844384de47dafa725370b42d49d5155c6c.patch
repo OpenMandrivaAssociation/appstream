@@ -1,0 +1,60 @@
+From 227d67844384de47dafa725370b42d49d5155c6c Mon Sep 17 00:00:00 2001
+From: Matthias Klumpp <matthias@tenstral.net>
+Date: Sun, 7 Jan 2018 19:53:13 +0100
+Subject: [PATCH] Ensure LINGUAS update is only run explicitly
+
+This resolves issue #161, newer versions of Meson started to run the
+(buggy) LINGUAS update target by default for some reason.
+---
+ contrib/meson/update-linguas.sh |  8 ++++++++
+ po/meson.build                  | 17 ++++-------------
+ 2 files changed, 12 insertions(+), 13 deletions(-)
+ create mode 100755 contrib/meson/update-linguas.sh
+
+diff --git a/contrib/meson/update-linguas.sh b/contrib/meson/update-linguas.sh
+new file mode 100755
+index 0000000..f0beeae
+--- /dev/null
++++ b/contrib/meson/update-linguas.sh
+@@ -0,0 +1,8 @@
++#!/bin/sh
++
++find ${MESON_SOURCE_ROOT}/po \
++	-type f \
++	-iname "*.po" \
++        -printf '%f\n' \
++	| grep -oP '.*(?=[.])' | sort \
++	> ${MESON_SOURCE_ROOT}/po/LINGUAS
+diff --git a/po/meson.build b/po/meson.build
+index 0904c7f..f81255e 100644
+--- a/po/meson.build
++++ b/po/meson.build
+@@ -13,24 +13,15 @@ i18n.gettext (as_gettext_domain,
+     ]
+ )
+ 
+-make_linguas = custom_target ('make-linguas',
+-    build_always: true,
+-    output: 'LINGUAS_dummy', # fake output
+-    command: [
+-        'sh', '-c',
+-        'find ' + meson.current_source_dir() +
+-        ' -type f' +
+-        ' -iname "*.po"' +
+-        ' -printf \'%f\\n\'' +
+-        ' | grep -oP \'.*(?=[.])\' | sort' +
+-        ' > ' + join_paths(meson.current_source_dir(), 'LINGUAS')
+-    ]
++run_target ('make-linguas',
++    command: ['sh',
++              join_paths(meson.source_root(), 'contrib/meson/update-linguas.sh')]
+ )
+ 
+ # maintainer shortcut for updating l10n data
+ run_target ('l10n-update',
+-    depends: make_linguas,
+     command: ['ninja', '-C', meson.build_root(),
++              'make-linguas',
+               as_gettext_domain + '-pot',
+               as_gettext_domain + '-update-po']
+ )
