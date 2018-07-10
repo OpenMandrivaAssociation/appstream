@@ -19,7 +19,6 @@ License:	GPLv2+ and LGPLv2.1+
 Group:		System/Configuration/Packaging
 Url:		http://www.freedesktop.org/wiki/Distributions/AppStream/Software
 Source0:	http://www.freedesktop.org/software/appstream/releases/%{oname}-%{version}.tar.xz
-Patch0:		https://github.com/ximion/appstream/commit/227d67844384de47dafa725370b42d49d5155c6c.patch
 BuildRequires:	meson
 BuildRequires:	qmake5
 BuildRequires:	intltool
