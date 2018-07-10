@@ -12,14 +12,15 @@
 
 Summary:	Utilities to generate, maintain and access the AppStream Xapian database
 Name:		appstream
-Version:	0.10.6
+Version:	0.11.8
 Release:	1
 # lib LGPLv2.1+, tools GPLv2+
 License:	GPLv2+ and LGPLv2.1+
 Group:		System/Configuration/Packaging
 Url:		http://www.freedesktop.org/wiki/Distributions/AppStream/Software
 Source0:	http://www.freedesktop.org/software/appstream/releases/%{oname}-%{version}.tar.xz
-BuildRequires:	cmake
+Patch0:		https://github.com/ximion/appstream/commit/227d67844384de47dafa725370b42d49d5155c6c.patch
+BuildRequires:	meson
 BuildRequires:	qmake5
 BuildRequires:	intltool
 BuildRequires:	itstool
@@ -31,6 +32,7 @@ BuildRequires:	pkgconfig(packagekit-glib2)
 BuildRequires:	pkgconfig(Qt5Core)
 BuildRequires:	pkgconfig(Qt5Test)
 BuildRequires:	pkgconfig(yaml-0.1)
+BuildRequires:	gtk-doc
 BuildRequires:	libstemmer-devel
 Requires:	%{libname} = %{EVRD}
 # Should be added later, requires generation script
@@ -100,7 +102,7 @@ Provides:	%{name}-devel = %{EVRD}
 Development files for %{name}.
 
 %files -n %{devname}
-%{_includedir}/AppStream/
+%{_includedir}/appstream/
 %{_libdir}/libappstream.so
 %{_libdir}/pkgconfig/appstream.pc
 %dir %{_datadir}/gir-1.0
@@ -148,16 +150,15 @@ Development files for %{name}.
 %apply_patches
 
 %build
-%cmake \
-    -DQT:BOOL=ON \
-    -DAPPSTREAM_QT_VERSION:STRING="5" \
-    -DTESTS:BOOL=ON \
-    -DVAPI:BOOL=OFF
-
-%make
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+%meson -Dqt=true
+ninja -C build
 
 %install
-%makeinstall_std -C build
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+DESTDIR="%{buildroot}" ninja -C build install
 
 mkdir -p %{buildroot}%{_datadir}/app-info/{icons,xmls}
 mkdir -p %{buildroot}%{_var}/cache/app-info/{icons,xapian,xmls}
