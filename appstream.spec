@@ -24,6 +24,7 @@ BuildRequires:	qmake5
 BuildRequires:	intltool
 BuildRequires:	itstool
 BuildRequires:	xmlto
+BuildRequires:	gperf
 BuildRequires:	pkgconfig(gio-2.0)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(libxml-2.0)
