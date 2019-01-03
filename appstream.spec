@@ -30,6 +30,7 @@ BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	pkgconfig(packagekit-glib2)
 BuildRequires:	pkgconfig(Qt5Core)
+BuildRequires:	pkgconfig(Qt5Gui)
 BuildRequires:	pkgconfig(Qt5Test)
 BuildRequires:	pkgconfig(yaml-0.1)
 BuildRequires:	gtk-doc
