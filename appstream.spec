@@ -12,7 +12,7 @@
 
 Summary:	Utilities to generate, maintain and access the AppStream Xapian database
 Name:		appstream
-Version:	0.12.7
+Version:	0.12.9
 Release:	1
 # lib LGPLv2.1+, tools GPLv2+
 License:	GPLv2+ and LGPLv2.1+
@@ -36,6 +36,7 @@ BuildRequires:	cmake(Qt5LinguistTools)
 BuildRequires:	pkgconfig(yaml-0.1)
 BuildRequires:	gtk-doc
 BuildRequires:	libstemmer-devel
+BuildRequires:	lmdb-devel
 Requires:	%{libname} = %{EVRD}
 # Should be added later, requires generation script
 # Requires:	appstream-data
