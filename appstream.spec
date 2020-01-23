@@ -34,6 +34,7 @@ BuildRequires:	pkgconfig(Qt5Gui)
 BuildRequires:	pkgconfig(Qt5Test)
 BuildRequires:	cmake(Qt5LinguistTools)
 BuildRequires:	pkgconfig(yaml-0.1)
+BuildRequires:	pkgconfig(libsoup-2.4)
 BuildRequires:	gtk-doc
 BuildRequires:	libstemmer-devel
 BuildRequires:	lmdb-devel
