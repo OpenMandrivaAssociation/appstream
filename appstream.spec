@@ -58,6 +58,7 @@ AppStream database over a nice GObject-based interface.
 %ghost %{_var}/cache/app-info/cache.watch
 %dir %{_var}/cache/app-info
 %dir %{_var}/cache/app-info/icons
+%dir %{_var}/cache/app-info/gv
 %dir %{_var}/cache/app-info/xapian
 %dir %{_var}/cache/app-info/xmls
 %{_datadir}/gettext/its/metainfo.*
@@ -122,7 +123,7 @@ Development files for %{name}.
 Summary:	Shared library for %{name}
 Group:		System/Libraries
 Requires:	%{name} = %{EVRD}
-Obsoletes:  %{mklibname appstreamqt 1} < 0.10.4
+Obsoletes:	%{mklibname appstreamqt 1} < 0.10.4
 
 %description -n %{libnameqt}
 Shared library for %{name}.
@@ -138,7 +139,7 @@ Summary:	Development files for %{name}
 Group:		Development/KDE and Qt
 Requires:	%{libnameqt} = %{EVRD}
 Provides:	%{name}-qt5-devel = %{EVRD}
-Obsoletes:  %{mklibname appstreamqt -d} < 0.10.4
+Obsoletes:	%{mklibname appstreamqt -d} < 0.10.4
 
 %description -n %{devnameqt}
 Development files for %{name}.
@@ -165,7 +166,7 @@ export LC_ALL=en_US.UTF-8
 DESTDIR="%{buildroot}" ninja -C build install
 
 mkdir -p %{buildroot}%{_datadir}/app-info/{icons,xmls}
-mkdir -p %{buildroot}%{_var}/cache/app-info/{icons,xapian,xmls}
+mkdir -p %{buildroot}%{_var}/cache/app-info/{icons,gv,xapian,xmls}
 touch %{buildroot}%{_var}/cache/app-info/cache.watch
 
 %find_lang appstream
