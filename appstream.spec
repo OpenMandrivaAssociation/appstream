@@ -172,9 +172,10 @@ Vala files for %{name}.
 %build
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
-%meson  \
-        -Dqt=true \ 
-        -Dvapi=true
+%meson \
+  -Dqt=true \
+  -Dvapi=true
+
 ninja -C build
 
 %install
