@@ -13,7 +13,7 @@
 Summary:	Utilities to generate, maintain and access the AppStream Xapian database
 Name:		appstream
 Version:	0.12.10
-Release:	1
+Release:	2
 # lib LGPLv2.1+, tools GPLv2+
 License:	GPLv2+ and LGPLv2.1+
 Group:		System/Configuration/Packaging
@@ -35,6 +35,8 @@ BuildRequires:	pkgconfig(Qt5Test)
 BuildRequires:	cmake(Qt5LinguistTools)
 BuildRequires:	pkgconfig(yaml-0.1)
 BuildRequires:	pkgconfig(libsoup-2.4)
+BuildRequires:  pkgconfig(vapigen)
+BuildRequires:  vala-tools
 BuildRequires:	gtk-doc
 BuildRequires:	libstemmer-devel
 BuildRequires:	lmdb-devel
@@ -149,6 +151,19 @@ Development files for %{name}.
 %{_libdir}/cmake/AppStreamQt/
 %{_libdir}/libAppStreamQt.so
 
+%package vala
+Summary: Vala bindings for %{name}
+Group:   Development/Other
+Requires: %{name}%{?_isa} = %{version}-%{release}
+Requires: vala
+
+%description vala
+Vala files for %{name}.
+
+%files vala
+%{_datadir}/vala/vapi/appstream.deps
+%{_datadir}/vala/vapi/appstream.vapi
+
 #----------------------------------------------------------------------------
 
 %prep
@@ -157,7 +172,10 @@ Development files for %{name}.
 %build
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
-%meson -Dqt=true
+%meson \
+  -Dqt=true \
+  -Dvapi=true
+
 ninja -C build
 
 %install
