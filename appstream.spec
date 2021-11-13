@@ -119,6 +119,7 @@ Development files for %{name}.
 %dir %{_datadir}/gtk-doc/
 %dir %{_datadir}/gtk-doc/html/
 %{_datadir}/gtk-doc/html/appstream
+%{_datadir}/installed-tests/appstream/metainfo-validate.test
 
 #----------------------------------------------------------------------------
 
