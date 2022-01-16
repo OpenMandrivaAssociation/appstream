@@ -42,6 +42,7 @@ BuildRequires:  vala-tools
 BuildRequires:	gtk-doc
 BuildRequires:	libstemmer-devel
 BuildRequires:	lmdb-devel
+BuildRequires:  %{_lib}xmlb2
 Requires:	%{libname} = %{EVRD}
 # Should be added later, requires generation script
 # Requires:	appstream-data
