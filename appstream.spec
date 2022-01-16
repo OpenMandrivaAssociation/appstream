@@ -12,7 +12,7 @@
 
 Summary:	Utilities to generate, maintain and access the AppStream Xapian database
 Name:		appstream
-Version:	0.14.6
+Version:	0.15.1
 Release:	1
 # lib LGPLv2.1+, tools GPLv2+
 License:	GPLv2+ and LGPLv2.1+
@@ -29,6 +29,7 @@ BuildRequires:	pkgconfig(gio-2.0)
 BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(libxml-2.0)
+BuildRequires:  pkgconfig(xmlb) >= 0.3.6
 BuildRequires:	pkgconfig(packagekit-glib2)
 BuildRequires:	pkgconfig(Qt5Core)
 BuildRequires:	pkgconfig(Qt5Gui)
