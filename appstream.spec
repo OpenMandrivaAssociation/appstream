@@ -28,8 +28,8 @@ BuildRequires:	gperf
 BuildRequires:	pkgconfig(gio-2.0)
 BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
-BuildRequires:	pkgconfig(libxml-2.0) >= 0.3.6
-BuildRequires:  pkgconfig(xmlb)
+BuildRequires:	pkgconfig(libxml-2.0)
+BuildRequires:  pkgconfig(xmlb) >= 0.3.6
 BuildRequires:	pkgconfig(packagekit-glib2)
 BuildRequires:	pkgconfig(Qt5Core)
 BuildRequires:	pkgconfig(Qt5Gui)
