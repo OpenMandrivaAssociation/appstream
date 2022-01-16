@@ -28,7 +28,7 @@ BuildRequires:	gperf
 BuildRequires:	pkgconfig(gio-2.0)
 BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
-BuildRequires:	pkgconfig(libxml-2.0)
+BuildRequires:	pkgconfig(libxml-2.0) >= 0.3.6
 BuildRequires:  pkgconfig(xmlb)
 BuildRequires:	pkgconfig(packagekit-glib2)
 BuildRequires:	pkgconfig(Qt5Core)
@@ -42,7 +42,6 @@ BuildRequires:  vala-tools
 BuildRequires:	gtk-doc
 BuildRequires:	libstemmer-devel
 BuildRequires:	lmdb-devel
-BuildRequires:  %{_lib}xmlb2
 Requires:	%{libname} = %{EVRD}
 # Should be added later, requires generation script
 # Requires:	appstream-data
