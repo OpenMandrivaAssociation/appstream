@@ -12,7 +12,7 @@
 
 Summary:	Utilities to generate, maintain and access the AppStream Xapian database
 Name:		appstream
-Version:	0.15.6
+Version:	0.16.0
 Release:	1
 # lib LGPLv2.1+, tools GPLv2+
 License:	GPLv2+ and LGPLv2.1+
@@ -38,6 +38,7 @@ BuildRequires:	cmake(Qt5LinguistTools)
 BuildRequires:	pkgconfig(yaml-0.1)
 BuildRequires:	pkgconfig(libsoup-2.4)
 BuildRequires:  pkgconfig(vapigen)
+BuildRequires:  pkgconfig(libsystemd)
 BuildRequires:  vala-tools
 BuildRequires:	gtk-doc
 BuildRequires:	libstemmer-devel
@@ -68,6 +69,12 @@ AppStream database over a nice GObject-based interface.
 %{_datadir}/gettext/its/metainfo.*
 
 %posttrans
+%{_bindir}/appstreamcli refresh --force >& /dev/null ||:
+ 
+%transfiletriggerin -- %{_datadir}/app-info/xmls
+%{_bindir}/appstreamcli refresh --force >& /dev/null ||:
+ 
+%transfiletriggerpostun -- %{_datadir}/app-info/xmls
 %{_bindir}/appstreamcli refresh --force >& /dev/null ||:
 
 #----------------------------------------------------------------------------
@@ -155,10 +162,10 @@ Development files for %{name}.
 %{_libdir}/libAppStreamQt.so
 
 %package vala
-Summary: Vala bindings for %{name}
-Group:   Development/Other
-Requires: %{name}%{?_isa} = %{version}-%{release}
-Requires: vala
+Summary:	Vala bindings for %{name}
+Group:		Development/Other
+Requires:	%{name}%{?_isa} = %{EVRD}
+Requires:	vala
 
 %description vala
 Vala files for %{name}.
