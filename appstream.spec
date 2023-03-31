@@ -12,7 +12,7 @@
 
 Summary:	Utilities to generate, maintain and access the AppStream Xapian database
 Name:		appstream
-Version:	0.16.0
+Version:	0.16.1
 Release:	1
 # lib LGPLv2.1+, tools GPLv2+
 License:	GPLv2+ and LGPLv2.1+
@@ -180,19 +180,14 @@ Vala files for %{name}.
 %autosetup -n %{oname}-%{version}
 
 %build
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
 %meson \
-  -Dqt=true \
-  -Dvapi=true
+    -Dqt=true \
+    -Dvapi=true
 
-ninja -C build
+%meson_build
 
 %install
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-DESTDIR="%{buildroot}" ninja -C build install
-
+%meson_install
 mkdir -p %{buildroot}%{_datadir}/app-info/{icons,xmls}
 mkdir -p %{buildroot}%{_var}/cache/app-info/{icons,gv,xapian,xmls}
 touch %{buildroot}%{_var}/cache/app-info/cache.watch
