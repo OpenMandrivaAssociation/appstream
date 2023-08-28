@@ -13,7 +13,7 @@
 Summary:	Utilities to generate, maintain and access the AppStream Xapian database
 Name:		appstream
 Version:	0.16.2
-Release:	2
+Release:	3
 # lib LGPLv2.1+, tools GPLv2+
 License:	GPLv2+ and LGPLv2.1+
 Group:		System/Configuration/Packaging
@@ -29,7 +29,7 @@ BuildRequires:	pkgconfig(gio-2.0)
 BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(libxml-2.0)
-BuildRequires:  pkgconfig(xmlb) >= 0.3.6
+BuildRequires:	pkgconfig(xmlb) >= 0.3.6
 BuildRequires:	pkgconfig(packagekit-glib2)
 BuildRequires:	pkgconfig(Qt5Core)
 BuildRequires:	pkgconfig(Qt5Gui)
@@ -37,9 +37,9 @@ BuildRequires:	pkgconfig(Qt5Test)
 BuildRequires:	cmake(Qt5LinguistTools)
 BuildRequires:	pkgconfig(yaml-0.1)
 BuildRequires:	pkgconfig(libsoup-2.4)
-BuildRequires:  pkgconfig(vapigen)
-BuildRequires:  pkgconfig(libsystemd)
-BuildRequires:  vala-tools
+BuildRequires:	pkgconfig(vapigen)
+BuildRequires:	pkgconfig(libsystemd)
+BuildRequires:	vala-tools
 BuildRequires:	gtk-doc
 BuildRequires:	libstemmer-devel
 BuildRequires:	lmdb-devel
