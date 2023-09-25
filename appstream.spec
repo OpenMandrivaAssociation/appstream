@@ -7,13 +7,14 @@
 %define devname %mklibname %{name} -d
 
 %define qt_major 2
-%define libnameqt %mklibname AppStreamQt %{qt_major}
+%define oldlibnameqt %mklibname AppStreamQt 2
+%define libnameqt %mklibname AppStreamQt
 %define devnameqt %mklibname AppStreamQt -d
 
 Summary:	Utilities to generate, maintain and access the AppStream Xapian database
 Name:		appstream
 Version:	0.16.2
-Release:	3
+Release:	4
 # lib LGPLv2.1+, tools GPLv2+
 License:	GPLv2+ and LGPLv2.1+
 Group:		System/Configuration/Packaging
@@ -135,7 +136,9 @@ Development files for %{name}.
 Summary:	Shared library for %{name}
 Group:		System/Libraries
 Requires:	%{name} = %{EVRD}
+%rename   %{oldlibnameqt}
 Obsoletes:	%{mklibname appstreamqt 1} < 0.10.4
+Obsoletes:	%{mklibname appstreamqt 3} < 1.0.0-0.20230924.1
 
 %description -n %{libnameqt}
 Shared library for %{name}.
