@@ -13,8 +13,8 @@
 
 Summary:	Utilities to generate, maintain and access the AppStream Xapian database
 Name:		appstream
-Version:	0.16.2
-Release:	4
+Version:	0.16.3
+Release:	1
 # lib LGPLv2.1+, tools GPLv2+
 License:	GPLv2+ and LGPLv2.1+
 Group:		System/Configuration/Packaging
@@ -138,7 +138,7 @@ Group:		System/Libraries
 Requires:	%{name} = %{EVRD}
 %rename   %{oldlibnameqt}
 Obsoletes:	%{mklibname appstreamqt 1} < 0.10.4
-Obsoletes:	%{mklibname appstreamqt 3} < 1.0.0-0.20230924.1
+Obsoletes:	%{mklibname AppStreamQt 3} < 1.0.0-0.20230924.1
 
 %description -n %{libnameqt}
 Shared library for %{name}.
