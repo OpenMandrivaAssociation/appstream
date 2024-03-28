@@ -13,13 +13,13 @@
 
 Summary:	Utilities to generate, maintain and access the AppStream Xapian database
 Name:		appstream
-Version:	0.16.3
+Version:	0.16.4
 Release:	1
 # lib LGPLv2.1+, tools GPLv2+
 License:	GPLv2+ and LGPLv2.1+
 Group:		System/Configuration/Packaging
-Url:		http://www.freedesktop.org/wiki/Distributions/AppStream/Software
-Source0:	http://www.freedesktop.org/software/appstream/releases/%{oname}-%{version}.tar.xz
+Url:		https://www.freedesktop.org/wiki/Distributions/AppStream/Software
+Source0:	https://www.freedesktop.org/software/appstream/releases/%{oname}-%{version}.tar.xz
 BuildRequires:	meson
 BuildRequires:	qmake5
 BuildRequires:	intltool
