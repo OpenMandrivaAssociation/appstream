@@ -7,9 +7,13 @@
 %define devname %mklibname %{name} -d
 
 %define qt_major 3
+# QTas5
 %define oldlibnameqt %mklibname AppStreamQt 2
 %define libnameqt %mklibname AppStreamQt
 %define devnameqt %mklibname AppStreamQt -d
+# QTas6
+%define libnameqt6 %mklibname AppStreamQt6 %{qt_major}
+%define devnameqt6 %mklibname AppStreamQt6 -d
 
 Summary:	Utilities to generate, maintain and access the AppStream Xapian database
 Name:		appstream
@@ -140,7 +144,7 @@ Development files for %{name}.
 %{_datadir}/installed-tests/appstream/metainfo-validate.test
 
 #----------------------------------------------------------------------------
-
+# QTas5
 %package -n %{libnameqt}
 Summary:	Shared library for %{name}
 Group:		System/Libraries
@@ -162,7 +166,7 @@ Shared library for %{name}.
 Summary:	Development files for %{name}
 Group:		Development/KDE and Qt
 Requires:	%{libnameqt} = %{EVRD}
-Provides:	%{name}-qt6-devel = %{EVRD}
+Provides:	%{name}-qt-devel = %{EVRD}
 Obsoletes:	%{mklibname appstreamqt -d} < 0.10.4
 
 %description -n %{devnameqt}
@@ -172,6 +176,37 @@ Development files for %{name}.
 %{_includedir}/AppStreamQt5/
 %{_libdir}/cmake/AppStreamQt5/
 %{_libdir}/libAppStreamQt5.so
+
+#----------------------------------------------------------------------------
+# QTas6
+%package -n %{libnameqt6}
+Summary:	Shared library for %{name}
+Group:		System/Libraries
+Requires:	%{libname} = %{EVRD}
+
+%description -n %{libnameqt6}
+Shared library for %{name}.
+
+%files -n %{libnameqt6}
+%{_libdir}/libAppStreamQt.so.%{qt_major}*
+%{_libdir}/libAppStreamQt.so.%{version}*
+
+#----------------------------------------------------------------------------
+
+%package -n %{devnameqt6}
+Summary:	Development files for %{name}
+Group:		Development/KDE and Qt
+Requires:	%{libnameqt6} = %{EVRD}
+Provides:	appstream-qt6-devel = %{EVRD}
+Obsoletes:	%{mklibname appstreamqt -d} < 0.10.4
+
+%description -n %{devnameqt6}
+Development files for %{name}.
+
+%files -n %{devnameqt6}
+%{_includedir}/AppStreamQt/
+%{_libdir}/cmake/AppStreamQt/
+%{_libdir}/libAppStreamQt.so
 
 %package vala
 Summary:	Vala bindings for %{name}
