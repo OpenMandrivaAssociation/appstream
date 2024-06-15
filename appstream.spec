@@ -67,7 +67,6 @@ AppStream database over a nice GObject-based interface.
 %dir %{_var}/cache/swcatalog
 %dir %{_var}/cache/swcatalog/icons
 %dir %{_var}/cache/swcatalog/gv
-%dir %{_var}/cache/swcatalog/xapian
 %dir %{_var}/cache/swcatalog/xml
 %{_datadir}/gettext/its/metainfo.*
 
