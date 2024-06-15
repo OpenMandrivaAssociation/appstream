@@ -59,16 +59,17 @@ AppStream database over a nice GObject-based interface.
 %config(noreplace) %{_sysconfdir}/appstream.conf
 %{_bindir}/appstreamcli
 %{_mandir}/man1/appstreamcli.1.*
-%dir %{_datadir}/app-info/
-%dir %{_datadir}/app-info/icons
-%dir %{_datadir}/app-info/xmls
+%{_datadir}/appstream/
+#dir %{_datadir}/app-info/
+#dir %{_datadir}/app-info/icons
+#dir %{_datadir}/app-info/xmls
 %{_datadir}/metainfo/org.freedesktop.appstream.cli.metainfo.xml
 %ghost %{_var}/cache/app-info/cache.watch
-%dir %{_var}/cache/app-info
-%dir %{_var}/cache/app-info/icons
-%dir %{_var}/cache/app-info/gv
-%dir %{_var}/cache/app-info/xapian
-%dir %{_var}/cache/app-info/xmls
+%dir %{_var}/cache/swcatalog
+%dir %{_var}/cache/swcatalog/icons
+%dir %{_var}/cache/swcatalog/gv
+%dir %{_var}/cache/swcatalog/xapian
+%dir %{_var}/cache/swcatalog/xml
 %{_datadir}/gettext/its/metainfo.*
 
 %posttrans
