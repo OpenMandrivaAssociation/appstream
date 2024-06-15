@@ -56,7 +56,6 @@ AppStream database over a nice GObject-based interface.
 
 %files -f appstream.lang
 %doc AUTHORS
-%config(noreplace) %{_sysconfdir}/appstream.conf
 %{_bindir}/appstreamcli
 %{_mandir}/man1/appstreamcli.1.*
 %{_datadir}/appstream/
