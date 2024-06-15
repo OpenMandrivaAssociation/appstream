@@ -28,6 +28,7 @@ BuildRequires:	xmlto
 BuildRequires:	gperf
 BuildRequires:	pkgconfig(gio-2.0)
 BuildRequires:	pkgconfig(libcurl)
+BuildRequires: pkgconfig(gi-docgen)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	pkgconfig(xmlb) >= 0.3.6
