@@ -186,6 +186,7 @@ Vala files for %{name}.
 %build
 %meson \
     -Dqt=true \
+    -Dqt-versions=5,6 \
     -Dvapi=true
 
 %meson_build
