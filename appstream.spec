@@ -1,12 +1,12 @@
 %define oname AppStream
 
-%define major 4
+%define major 5
 %define girmajor 1.0
 %define libname %mklibname %{name} %{major}
 %define girname %mklibname %{name}-gir %{girmajor}
 %define devname %mklibname %{name} -d
 
-%define qt_major 2
+%define qt_major 3
 %define oldlibnameqt %mklibname AppStreamQt 2
 %define libnameqt %mklibname AppStreamQt
 %define devnameqt %mklibname AppStreamQt -d
@@ -21,7 +21,7 @@ Group:		System/Configuration/Packaging
 Url:		https://www.freedesktop.org/wiki/Distributions/AppStream/Software
 Source0:	https://www.freedesktop.org/software/appstream/releases/%{oname}-%{version}.tar.xz
 BuildRequires:	meson
-BuildRequires:	qmake5
+BuildRequires:	qmake-qt6
 BuildRequires:	intltool
 BuildRequires:	itstool
 BuildRequires:	xmlto
@@ -33,14 +33,15 @@ BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	pkgconfig(xmlb) >= 0.3.6
 BuildRequires:	pkgconfig(packagekit-glib2)
-BuildRequires:	pkgconfig(Qt5Core)
-BuildRequires:	pkgconfig(Qt5Gui)
-BuildRequires:	pkgconfig(Qt5Test)
-BuildRequires:	cmake(Qt5LinguistTools)
+BuildRequires:	pkgconfig(Qt6Core)
+BuildRequires:	pkgconfig(Qt6Gui)
+BuildRequires:	pkgconfig(Qt6Test)
+BuildRequires:	cmake(Qt6LinguistTools)
 BuildRequires:	pkgconfig(yaml-0.1)
 BuildRequires:	pkgconfig(libsoup-2.4)
 BuildRequires:	pkgconfig(vapigen)
 BuildRequires:	pkgconfig(libsystemd)
+BuildRequires: pkgconfig(libzstd)
 BuildRequires:	vala-tools
 BuildRequires:	gtk-doc
 BuildRequires:	libstemmer-devel
@@ -154,7 +155,7 @@ Shared library for %{name}.
 Summary:	Development files for %{name}
 Group:		Development/KDE and Qt
 Requires:	%{libnameqt} = %{EVRD}
-Provides:	%{name}-qt5-devel = %{EVRD}
+Provides:	%{name}-qt6-devel = %{EVRD}
 Obsoletes:	%{mklibname appstreamqt -d} < 0.10.4
 
 %description -n %{devnameqt}
@@ -192,8 +193,8 @@ Vala files for %{name}.
 
 %install
 %meson_install
-mkdir -p %{buildroot}%{_datadir}/app-info/{icons,xmls}
+mkdir -p %{buildroot}/var/cache/swcatalog/{icons,gv,xml}
 mkdir -p %{buildroot}%{_var}/cache/app-info/{icons,gv,xapian,xmls}
-touch %{buildroot}%{_var}/cache/app-info/cache.watch
+touch %{buildroot}/var/cache/swcatalog/cache.watch
 
 %find_lang appstream
