@@ -63,7 +63,7 @@ AppStream database over a nice GObject-based interface.
 #dir %{_datadir}/app-info/icons
 #dir %{_datadir}/app-info/xmls
 %{_datadir}/metainfo/org.freedesktop.appstream.cli.metainfo.xml
-%ghost %{_var}/cache/app-info/cache.watch
+%ghost %{_var}/cache/swcatalog/cache.watch
 %dir %{_var}/cache/swcatalog
 %dir %{_var}/cache/swcatalog/icons
 %dir %{_var}/cache/swcatalog/gv
