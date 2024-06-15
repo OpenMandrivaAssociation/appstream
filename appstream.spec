@@ -153,8 +153,8 @@ Obsoletes:	%{mklibname AppStreamQt 3} < 1.0.0-0.20230924.1
 Shared library for %{name}.
 
 %files -n %{libnameqt}
-%{_libdir}/libAppStreamQt.so.%{qt_major}*
-%{_libdir}/libAppStreamQt.so.%{version}*
+%{_libdir}/libAppStreamQt5.so.%{qt_major}*
+%{_libdir}/libAppStreamQt5.so.%{version}*
 
 #----------------------------------------------------------------------------
 
@@ -169,9 +169,9 @@ Obsoletes:	%{mklibname appstreamqt -d} < 0.10.4
 Development files for %{name}.
 
 %files -n %{devnameqt}
-%{_includedir}/AppStreamQt/
-%{_libdir}/cmake/AppStreamQt/
-%{_libdir}/libAppStreamQt.so
+%{_includedir}/AppStreamQt5/
+%{_libdir}/cmake/AppStreamQt5/
+%{_libdir}/libAppStreamQt5.so
 
 %package vala
 Summary:	Vala bindings for %{name}
