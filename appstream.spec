@@ -1,19 +1,23 @@
 %define oname AppStream
 
-%define major 4
+%define major 5
 %define girmajor 1.0
 %define libname %mklibname %{name} %{major}
 %define girname %mklibname %{name}-gir %{girmajor}
 %define devname %mklibname %{name} -d
 
-%define qt_major 2
+%define qt_major 3
+# QTas5
 %define oldlibnameqt %mklibname AppStreamQt 2
 %define libnameqt %mklibname AppStreamQt
 %define devnameqt %mklibname AppStreamQt -d
+# QTas6
+%define libnameqt6 %mklibname AppStreamQt6 %{qt_major}
+%define devnameqt6 %mklibname AppStreamQt6 -d
 
 Summary:	Utilities to generate, maintain and access the AppStream Xapian database
 Name:		appstream
-Version:	0.16.4
+Version:	1.0.3
 Release:	1
 # lib LGPLv2.1+, tools GPLv2+
 License:	GPLv2+ and LGPLv2.1+
@@ -21,29 +25,39 @@ Group:		System/Configuration/Packaging
 Url:		https://www.freedesktop.org/wiki/Distributions/AppStream/Software
 Source0:	https://www.freedesktop.org/software/appstream/releases/%{oname}-%{version}.tar.xz
 BuildRequires:	meson
-BuildRequires:	qmake5
 BuildRequires:	intltool
 BuildRequires:	itstool
 BuildRequires:	xmlto
 BuildRequires:	gperf
 BuildRequires:	pkgconfig(gio-2.0)
 BuildRequires:	pkgconfig(libcurl)
+BuildRequires: pkgconfig(gi-docgen)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	pkgconfig(xmlb) >= 0.3.6
 BuildRequires:	pkgconfig(packagekit-glib2)
-BuildRequires:	pkgconfig(Qt5Core)
-BuildRequires:	pkgconfig(Qt5Gui)
-BuildRequires:	pkgconfig(Qt5Test)
-BuildRequires:	cmake(Qt5LinguistTools)
 BuildRequires:	pkgconfig(yaml-0.1)
 BuildRequires:	pkgconfig(libsoup-2.4)
 BuildRequires:	pkgconfig(vapigen)
 BuildRequires:	pkgconfig(libsystemd)
+BuildRequires: pkgconfig(libzstd)
 BuildRequires:	vala-tools
 BuildRequires:	gtk-doc
 BuildRequires:	libstemmer-devel
 BuildRequires:	lmdb-devel
+# QTas5
+BuildRequires:	qmake5
+BuildRequires:	pkgconfig(Qt5Core)
+BuildRequires:	pkgconfig(Qt5Gui)
+BuildRequires:	pkgconfig(Qt5Test)
+BuildRequires:	cmake(Qt5LinguistTools)
+# QTas6
+BuildRequires:	qmake-qt6
+BuildRequires:	pkgconfig(Qt6Core)
+BuildRequires:	pkgconfig(Qt6Gui)
+BuildRequires:	pkgconfig(Qt6Test)
+BuildRequires:	cmake(Qt6LinguistTools)
+
 Requires:	%{libname} = %{EVRD}
 # Should be added later, requires generation script
 # Requires:	appstream-data
@@ -54,19 +68,18 @@ AppStream database over a nice GObject-based interface.
 
 %files -f appstream.lang
 %doc AUTHORS
-%config(noreplace) %{_sysconfdir}/appstream.conf
 %{_bindir}/appstreamcli
 %{_mandir}/man1/appstreamcli.1.*
-%dir %{_datadir}/app-info/
-%dir %{_datadir}/app-info/icons
-%dir %{_datadir}/app-info/xmls
+%{_datadir}/appstream/
+#dir %{_datadir}/app-info/
+#dir %{_datadir}/app-info/icons
+#dir %{_datadir}/app-info/xmls
 %{_datadir}/metainfo/org.freedesktop.appstream.cli.metainfo.xml
-%ghost %{_var}/cache/app-info/cache.watch
-%dir %{_var}/cache/app-info
-%dir %{_var}/cache/app-info/icons
-%dir %{_var}/cache/app-info/gv
-%dir %{_var}/cache/app-info/xapian
-%dir %{_var}/cache/app-info/xmls
+%ghost %{_var}/cache/swcatalog/cache.watch
+%dir %{_var}/cache/swcatalog
+%dir %{_var}/cache/swcatalog/icons
+%dir %{_var}/cache/swcatalog/gv
+%dir %{_var}/cache/swcatalog/xml
 %{_datadir}/gettext/its/metainfo.*
 
 %posttrans
@@ -131,7 +144,7 @@ Development files for %{name}.
 %{_datadir}/installed-tests/appstream/metainfo-validate.test
 
 #----------------------------------------------------------------------------
-
+# QTas5
 %package -n %{libnameqt}
 Summary:	Shared library for %{name}
 Group:		System/Libraries
@@ -144,8 +157,8 @@ Obsoletes:	%{mklibname AppStreamQt 3} < 1.0.0-0.20230924.1
 Shared library for %{name}.
 
 %files -n %{libnameqt}
-%{_libdir}/libAppStreamQt.so.%{qt_major}*
-%{_libdir}/libAppStreamQt.so.%{version}*
+%{_libdir}/libAppStreamQt5.so.%{qt_major}*
+%{_libdir}/libAppStreamQt5.so.%{version}*
 
 #----------------------------------------------------------------------------
 
@@ -153,13 +166,44 @@ Shared library for %{name}.
 Summary:	Development files for %{name}
 Group:		Development/KDE and Qt
 Requires:	%{libnameqt} = %{EVRD}
-Provides:	%{name}-qt5-devel = %{EVRD}
+Provides:	%{name}-qt-devel = %{EVRD}
 Obsoletes:	%{mklibname appstreamqt -d} < 0.10.4
 
 %description -n %{devnameqt}
 Development files for %{name}.
 
 %files -n %{devnameqt}
+%{_includedir}/AppStreamQt5/
+%{_libdir}/cmake/AppStreamQt5/
+%{_libdir}/libAppStreamQt5.so
+
+#----------------------------------------------------------------------------
+# QTas6
+%package -n %{libnameqt6}
+Summary:	Shared library for %{name}
+Group:		System/Libraries
+Requires:	%{libname} = %{EVRD}
+
+%description -n %{libnameqt6}
+Shared library for %{name}.
+
+%files -n %{libnameqt6}
+%{_libdir}/libAppStreamQt.so.%{qt_major}*
+%{_libdir}/libAppStreamQt.so.%{version}*
+
+#----------------------------------------------------------------------------
+
+%package -n %{devnameqt6}
+Summary:	Development files for %{name}
+Group:		Development/KDE and Qt
+Requires:	%{libnameqt6} = %{EVRD}
+Provides:	appstream-qt6-devel = %{EVRD}
+Obsoletes:	%{mklibname appstreamqt -d} < 0.10.4
+
+%description -n %{devnameqt6}
+Development files for %{name}.
+
+%files -n %{devnameqt6}
 %{_includedir}/AppStreamQt/
 %{_libdir}/cmake/AppStreamQt/
 %{_libdir}/libAppStreamQt.so
@@ -185,14 +229,15 @@ Vala files for %{name}.
 %build
 %meson \
     -Dqt=true \
+    -Dqt-versions=5,6 \
     -Dvapi=true
 
 %meson_build
 
 %install
 %meson_install
-mkdir -p %{buildroot}%{_datadir}/app-info/{icons,xmls}
+mkdir -p %{buildroot}/var/cache/swcatalog/{icons,gv,xml}
 mkdir -p %{buildroot}%{_var}/cache/app-info/{icons,gv,xapian,xmls}
-touch %{buildroot}%{_var}/cache/app-info/cache.watch
+touch %{buildroot}/var/cache/swcatalog/cache.watch
 
 %find_lang appstream
