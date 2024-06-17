@@ -97,6 +97,7 @@ AppStream database over a nice GObject-based interface.
 Summary:	Shared library for %{name}
 Group:		System/Libraries
 Obsoletes:	%{mklibname appstream 2} < 0.9.0
+Obsoletes:	%{mklibname appstream1.0 5} < 1.0.3
 
 %description -n %{libname}
 Shared library for %{name}.
