@@ -18,7 +18,7 @@
 Summary:	Utilities to generate, maintain and access the AppStream Xapian database
 Name:		appstream
 Version:	1.0.3
-Release:	2
+Release:	3
 # lib LGPLv2.1+, tools GPLv2+
 License:	GPLv2+ and LGPLv2.1+
 Group:		System/Configuration/Packaging
@@ -71,9 +71,6 @@ AppStream database over a nice GObject-based interface.
 %{_bindir}/appstreamcli
 %{_mandir}/man1/appstreamcli.1.*
 %{_datadir}/appstream/
-#dir %{_datadir}/app-info/
-#dir %{_datadir}/app-info/icons
-#dir %{_datadir}/app-info/xmls
 %{_datadir}/metainfo/org.freedesktop.appstream.cli.metainfo.xml
 %ghost %{_var}/cache/swcatalog/cache.watch
 %dir %{_var}/cache/swcatalog
@@ -98,6 +95,7 @@ Summary:	Shared library for %{name}
 Group:		System/Libraries
 Obsoletes:	%{mklibname appstream 2} < 0.9.0
 Obsoletes:	%{mklibname appstream1.0 5} < 1.0.3
+Obsoletes: %{_lib}appstream4 < 1.0.3
 
 %description -n %{libname}
 Shared library for %{name}.
@@ -113,6 +111,7 @@ Summary:	GObject Introspection files for %{name}
 Group:		System/Libraries
 Requires:	%{libname} = %{EVRD}
 Obsoletes:	%{mklibname appstream-git 0.8} < 0.9.0
+Obsoletes: %{_lib}appstream-gir1.0 < 1.0.3
 
 %description -n %{girname}
 GObject Introspection files for %{name}.
@@ -185,6 +184,7 @@ Development files for %{name}.
 Summary:	Shared library for %{name}
 Group:		System/Libraries
 Requires:	%{libname} = %{EVRD}
+Obsoletes: %{_lib}appstream1.0_5 < 1.0.3
 
 %description -n %{libnameqt6}
 Shared library for %{name}.
