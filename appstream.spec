@@ -7,17 +7,17 @@
 %define devname %mklibname %{name} -d
 
 %define qt_major 3
-# QTas5
+# Qt 5 (removed 2026/01/13, after 6.0)
 %define oldlibnameqt %mklibname AppStreamQt 2
 %define libnameqt %mklibname AppStreamQt
 %define devnameqt %mklibname AppStreamQt -d
-# QTas6
+# Qt 6
 %define libnameqt6 %mklibname AppStreamQt6 %{qt_major}
 %define devnameqt6 %mklibname AppStreamQt6 -d
 
 Summary:	Utilities to generate, maintain and access the AppStream Xapian database
 Name:		appstream
-Version:	1.0.4
+Version:	1.1.1
 Release:	1
 # lib LGPLv2.1+, tools GPLv2+
 License:	GPLv2+ and LGPLv2.1+
@@ -45,12 +45,6 @@ BuildRequires:	vala-tools
 BuildRequires:	gtk-doc
 BuildRequires:	libstemmer-devel
 BuildRequires:	lmdb-devel
-# QTas5
-BuildRequires:	qmake5
-BuildRequires:	pkgconfig(Qt5Core)
-BuildRequires:	pkgconfig(Qt5Gui)
-BuildRequires:	pkgconfig(Qt5Test)
-BuildRequires:	cmake(Qt5LinguistTools)
 # QTas6
 BuildRequires:	qmake-qt6
 BuildRequires:	pkgconfig(Qt6Core)
@@ -145,46 +139,14 @@ Development files for %{name}.
 %{_datadir}/installed-tests/appstream/metainfo-validate.test
 
 #----------------------------------------------------------------------------
-# QTas5
-%package -n %{libnameqt}
-Summary:	Shared library for %{name}
-Group:		System/Libraries
-Requires:	%{name} = %{EVRD}
-%rename   %{oldlibnameqt}
-Obsoletes:	%{mklibname appstreamqt 1} < 0.10.4
-Obsoletes:	%{mklibname AppStreamQt 3} < 1.0.0-0.20230924.1
-
-%description -n %{libnameqt}
-Shared library for %{name}.
-
-%files -n %{libnameqt}
-%{_libdir}/libAppStreamQt5.so.%{qt_major}*
-%{_libdir}/libAppStreamQt5.so.%{version}*
-
-#----------------------------------------------------------------------------
-
-%package -n %{devnameqt}
-Summary:	Development files for %{name}
-Group:		Development/KDE and Qt
-Requires:	%{libnameqt} = %{EVRD}
-Provides:	%{name}-qt-devel = %{EVRD}
-Obsoletes:	%{mklibname appstreamqt -d} < 0.10.4
-
-%description -n %{devnameqt}
-Development files for %{name}.
-
-%files -n %{devnameqt}
-%{_includedir}/AppStreamQt5/
-%{_libdir}/cmake/AppStreamQt5/
-%{_libdir}/libAppStreamQt5.so
-
-#----------------------------------------------------------------------------
-# QTas6
+# Qt 6
 %package -n %{libnameqt6}
 Summary:	Shared library for %{name}
 Group:		System/Libraries
 Requires:	%{libname} = %{EVRD}
 Obsoletes: %{_lib}appstream1.0_5 < 1.0.3
+Obsoletes: %{oldlibnameqt} < %{EVRD}
+Obsoletes: %{libnameqt} < %{EVRD}
 
 %description -n %{libnameqt6}
 Shared library for %{name}.
@@ -201,6 +163,7 @@ Group:		Development/KDE and Qt
 Requires:	%{libnameqt6} = %{EVRD}
 Provides:	appstream-qt6-devel = %{EVRD}
 Obsoletes:	%{mklibname appstreamqt -d} < 0.10.4
+Obsoletes: %{devnameqt} < %{EVRD}
 
 %description -n %{devnameqt6}
 Development files for %{name}.
@@ -231,7 +194,6 @@ Vala files for %{name}.
 %build
 %meson \
     -Dqt=true \
-    -Dqt-versions=5,6 \
     -Dvapi=true
 
 %meson_build
