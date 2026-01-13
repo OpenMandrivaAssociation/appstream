@@ -36,7 +36,7 @@ BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	pkgconfig(xmlb) >= 0.3.6
 BuildRequires:	pkgconfig(packagekit-glib2)
-BuildRequires:	pkgconfig(yaml-0.1)
+BuildRequires:	pkgconfig(libfyaml)
 BuildRequires:	pkgconfig(libsoup-2.4)
 BuildRequires:	pkgconfig(vapigen)
 BuildRequires:	pkgconfig(libsystemd)
