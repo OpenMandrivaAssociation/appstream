@@ -15,6 +15,14 @@
 %define libnameqt6 %mklibname AppStreamQt6 %{qt_major}
 %define devnameqt6 %mklibname AppStreamQt6 -d
 
+# For bootstrapping -- requiring qt to get dnf
+# built would be overkill
+%bcond_without qt6
+
+# GIR and Vala too, and on top of being overkill, it's useless
+%bcond_without vala
+%bcond_without gir
+
 Summary:	Utilities to generate, maintain and access the AppStream Xapian database
 Name:		appstream
 Version:	1.1.1
@@ -31,8 +39,6 @@ BuildRequires:	xmlto
 BuildRequires:	gperf
 BuildRequires:	pkgconfig(gio-2.0)
 BuildRequires:	pkgconfig(libcurl)
-BuildRequires: pkgconfig(gi-docgen)
-BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	pkgconfig(xmlb) >= 0.3.6
 BuildRequires:	pkgconfig(packagekit-glib2)
@@ -41,16 +47,24 @@ BuildRequires:	pkgconfig(libsoup-2.4)
 BuildRequires:	pkgconfig(vapigen)
 BuildRequires:	pkgconfig(libsystemd)
 BuildRequires: pkgconfig(libzstd)
+%if %{with gir}
+BuildRequires: pkgconfig(gi-docgen)
+BuildRequires:	pkgconfig(gobject-introspection-1.0)
+%endif
+%if %{with vala}
 BuildRequires:	vala-tools
+%endif
 BuildRequires:	gtk-doc
 BuildRequires:	libstemmer-devel
 BuildRequires:	lmdb-devel
-# QTas6
+%if %{with qt6}
+# Qt 6
 BuildRequires:	qmake-qt6
 BuildRequires:	pkgconfig(Qt6Core)
 BuildRequires:	pkgconfig(Qt6Gui)
 BuildRequires:	pkgconfig(Qt6Test)
 BuildRequires:	cmake(Qt6LinguistTools)
+%endif
 
 Requires:	%{libname} = %{EVRD}
 # Should be added later, requires generation script
@@ -100,6 +114,7 @@ Shared library for %{name}.
 
 #----------------------------------------------------------------------------
 
+%if %{with gir}
 %package -n %{girname}
 Summary:	GObject Introspection files for %{name}
 Group:		System/Libraries
@@ -112,6 +127,7 @@ GObject Introspection files for %{name}.
 
 %files -n %{girname}
 %{_libdir}/girepository-1.0/AppStream-%{girmajor}.typelib
+%endif
 
 #----------------------------------------------------------------------------
 
@@ -119,7 +135,9 @@ GObject Introspection files for %{name}.
 Summary:	Development files for %{name}
 Group:		Development/C
 Requires:	%{libname} = %{EVRD}
+%if %{with gir}
 Requires:	%{girname} = %{EVRD}
+%endif
 Provides:	%{name}-devel = %{EVRD}
 %rename %{mklibname -d appstream1.0}
 
@@ -131,13 +149,16 @@ Development files for %{name}.
 %{_includedir}/appstream/
 %{_libdir}/libappstream.so
 %{_libdir}/pkgconfig/appstream.pc
+%if %{with gir}
 %dir %{_datadir}/gir-1.0
 %{_datadir}/gir-1.0/AppStream-%{girmajor}.gir
 %dir %{_datadir}/gtk-doc/
 %dir %{_datadir}/gtk-doc/html/
 %{_datadir}/gtk-doc/html/appstream
+%endif
 %{_datadir}/installed-tests/appstream/metainfo-validate.test
 
+%if %{with qt6}
 #----------------------------------------------------------------------------
 # Qt 6
 %package -n %{libnameqt6}
@@ -172,7 +193,11 @@ Development files for %{name}.
 %{_includedir}/AppStreamQt/
 %{_libdir}/cmake/AppStreamQt/
 %{_libdir}/libAppStreamQt.so
+%endif
 
+#----------------------------------------------------------------------------
+
+%if %{with vala}
 %package vala
 Summary:	Vala bindings for %{name}
 Group:		Development/Other
@@ -185,6 +210,7 @@ Vala files for %{name}.
 %files vala
 %{_datadir}/vala/vapi/appstream.deps
 %{_datadir}/vala/vapi/appstream.vapi
+%endif
 
 #----------------------------------------------------------------------------
 
@@ -193,8 +219,21 @@ Vala files for %{name}.
 
 %build
 %meson \
+%if %{with qt6}
     -Dqt=true \
-    -Dvapi=true
+%else
+    -Dqt=false \
+%endif
+%if %{with vala}
+    -Dvapi=true \
+%else
+    -Dvapi=false \
+%endif
+%if %{with gir}
+    -Dgir=true \
+%else
+    -Dgir=false \
+%endif
 
 %meson_build
 
