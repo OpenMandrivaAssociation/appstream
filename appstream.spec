@@ -81,6 +81,7 @@ AppStream database over a nice GObject-based interface.
 %{_mandir}/man1/appstreamcli.1.*
 %{_datadir}/appstream/
 %{_datadir}/metainfo/org.freedesktop.appstream.cli.metainfo.xml
+%{_datadir}/bash-completion/completions/appstreamcli
 %ghost %{_var}/cache/swcatalog/cache.watch
 %dir %{_var}/cache/swcatalog
 %dir %{_var}/cache/swcatalog/icons
