@@ -19,14 +19,14 @@
 # built would be overkill
 %bcond_without qt6
 
-# GIR and Vala too, and on top of being overkill, it's useless
+# GIR and Vala too
 %bcond_without vala
 %bcond_without gir
 
 Summary:	Utilities to generate, maintain and access the AppStream Xapian database
 Name:		appstream
-Version:	1.1.1
-Release:	2
+Version:	1.1.2
+Release:	1
 # lib LGPLv2.1+, tools GPLv2+
 License:	GPLv2+ and LGPLv2.1+
 Group:		System/Configuration/Packaging
