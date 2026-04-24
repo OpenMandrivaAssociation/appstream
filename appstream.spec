@@ -47,6 +47,7 @@ BuildRequires:	pkgconfig(libsoup-2.4)
 BuildRequires:	pkgconfig(vapigen)
 BuildRequires:	pkgconfig(libsystemd)
 BuildRequires: pkgconfig(libzstd)
+BuildRequires: pkgconfig(bash-completion)
 %if %{with gir}
 BuildRequires: pkgconfig(gi-docgen)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
