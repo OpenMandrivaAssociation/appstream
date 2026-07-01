@@ -25,7 +25,7 @@
 
 Summary:	Utilities to generate, maintain and access the AppStream Xapian database
 Name:		appstream
-Version:	1.1.2
+Version:	1.1.3
 Release:	1
 # lib LGPLv2.1+, tools GPLv2+
 License:	GPLv2+ and LGPLv2.1+
@@ -37,6 +37,7 @@ BuildRequires:	intltool
 BuildRequires:	itstool
 BuildRequires:	xmlto
 BuildRequires:	gperf
+BuildRequires:	docbook-style-xsl
 BuildRequires:	pkgconfig(gio-2.0)
 BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(libxml-2.0)
@@ -46,10 +47,10 @@ BuildRequires:	pkgconfig(libfyaml)
 BuildRequires:	pkgconfig(libsoup-2.4)
 BuildRequires:	pkgconfig(vapigen)
 BuildRequires:	pkgconfig(libsystemd)
-BuildRequires: pkgconfig(libzstd)
-BuildRequires: pkgconfig(bash-completion)
+BuildRequires: 	pkgconfig(libzstd)
+BuildRequires: 	pkgconfig(bash-completion)
 %if %{with gir}
-BuildRequires: pkgconfig(gi-docgen)
+BuildRequires:	pkgconfig(gi-docgen)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 %endif
 %if %{with vala}
