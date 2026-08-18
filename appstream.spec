@@ -37,7 +37,7 @@ BuildRequires:	intltool
 BuildRequires:	itstool
 BuildRequires:	xmlto
 BuildRequires:	gperf
-BuildRequires:	docbook-style-xsl
+BuildRequires:	docbook-style-xsl-ns
 BuildRequires:	pkgconfig(gio-2.0)
 BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(libxml-2.0)
