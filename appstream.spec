@@ -25,7 +25,7 @@
 
 Summary:	Utilities to generate, maintain and access the AppStream Xapian database
 Name:		appstream
-Version:	1.1.5
+Version:	1.1.6
 Release:	1
 # lib LGPLv2.1+, tools GPLv2+
 License:	GPLv2+ and LGPLv2.1+
@@ -218,7 +218,7 @@ Vala files for %{name}.
 #----------------------------------------------------------------------------
 
 %prep
-%autosetup -n AppStream-1.1.5
+%autosetup -n AppStream-%{version}
 
 %build
 %meson \
