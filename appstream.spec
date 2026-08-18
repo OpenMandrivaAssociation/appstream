@@ -47,6 +47,7 @@ BuildRequires:	pkgconfig(libfyaml)
 BuildRequires:	pkgconfig(libsoup-2.4)
 BuildRequires:	pkgconfig(vapigen)
 BuildRequires:	pkgconfig(libsystemd)
+BuildRequires:	pkgconfig(wayland-client)
 BuildRequires: 	pkgconfig(libzstd)
 BuildRequires: 	pkgconfig(bash-completion)
 %if %{with gir}
