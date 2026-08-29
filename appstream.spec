@@ -26,7 +26,7 @@
 Summary:	Utilities to generate, maintain and access the AppStream Xapian database
 Name:		appstream
 Version:	1.1.6
-Release:	1
+Release:	2
 # lib LGPLv2.1+, tools GPLv2+
 License:	GPLv2+ and LGPLv2.1+
 Group:		System/Configuration/Packaging
@@ -220,6 +220,11 @@ Vala files for %{name}.
 
 %prep
 %autosetup -n AppStream-%{version}
+%if %{cross_compiling}
+# Native appstream.pc is host-only; sysroot-only PKG_CONFIG_LIBDIR hides it.
+# The dependency() result is unused — only host appstreamcli is needed.
+sed -i "/dependency('appstream', version:/,+1d" data/meson.build
+%endif
 
 %build
 %meson \
